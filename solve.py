@@ -29,14 +29,7 @@ small_boxes_numbers = {
 
 small_boxes = {}
 
-grid = []
-
-for key, value in grid_rows.items():
-	grid.append(value)
-
-def update_small_boxes():	
-
-	global box
+def make_small_boxes():	
 
 	for row in range(1, 10):
 		arg1 = math.ceil(row/3)
@@ -51,5 +44,4 @@ def update_small_boxes():
 		small_boxes[k] = smallBox(k, v)
 
 if __name__ == '__main__':
-	update_small_boxes()
-	print(small_boxes["11"].digits)
+	make_small_boxes()

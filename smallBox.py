@@ -15,6 +15,8 @@ class smallBox:
 		l.pop()
 		self.digits = l
 
+	def update(self, loc, number):
+		self.digits[loc[0]][loc[1]] = str(number)
 
 	def is_in(self, number):
 		for row in self.digits:
@@ -22,3 +24,17 @@ class smallBox:
 				return True
 
 		return False
+
+	def get_columns(self):
+
+		columns = []
+
+		for i in range(len(self.digits)):
+			l = []
+
+			for j in range(len(self.digits[i])):
+				l.append(self.digits[j][i])
+
+			columns.append(l)
+
+		return(columns)
