@@ -18,7 +18,7 @@ class getNumbers():
 
 			for img in value:
 
-				#Use the tesseract OCR to recognize each digit in each image and remove the form feed and new line characters
+				#Use the tesseract OCR to recognize each digit in each image
 				digit = pytesseract.image_to_string(img,config='--psm 10')
 
 				#Remove noise
