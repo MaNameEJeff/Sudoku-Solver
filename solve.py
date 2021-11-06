@@ -61,7 +61,7 @@ def make_small_boxes():
 
 def solve_puzzle():
 
-	digit = not_completed[0]
+	digit = "9"#not_completed[0]
 	unfilled_boxes = []
 
 	number_in = {
@@ -80,30 +80,60 @@ def solve_puzzle():
 		if(value == False):
 			unfilled_boxes.append(small_boxes[location])
 
-	slots = unfilled_boxes[2].get_empty()
-	print(unfilled_boxes[2].location)
-	print(slots)
-	row_col_of_box = (int(unfilled_boxes[2].location[0]), int(unfilled_boxes[2].location[1]))
+	slots = unfilled_boxes[1].get_empty()
+	print(unfilled_boxes[1].location)
+	row_col_of_box = (int(unfilled_boxes[1].location[0]), int(unfilled_boxes[1].location[1]))
 
 	#Check columns
 	boxes_to_check_y = []
 
 	if ((row_col_of_box[0] - 1) != 0):
-		boxes_to_check_y.append(((row_col_of_box[0] - 1), row_col_of_box[1]))
+		boxes_to_check_y.append(small_boxes[str(row_col_of_box[0] - 1) + str(row_col_of_box[1])])
 
 	if ((row_col_of_box[0] + 1) < 4):
-		boxes_to_check_y.append(((row_col_of_box[0] + 1), row_col_of_box[1]))
+		boxes_to_check_y.append(small_boxes[str(row_col_of_box[0] + 1) + str(row_col_of_box[1])])
 
 	#Check rows
 	boxes_to_check_x = []
 	if ((row_col_of_box[1] - 1) != 0):
-		boxes_to_check_x.append((row_col_of_box[0], (row_col_of_box[1] - 1)))
+		boxes_to_check_x.append(small_boxes[str(row_col_of_box[0]) + str(row_col_of_box[1] - 1)])
 
 	if ((row_col_of_box[1] + 1) < 4):
-		boxes_to_check_x.append((row_col_of_box[0], (row_col_of_box[1] + 1)))
+		boxes_to_check_x.append(small_boxes[str(row_col_of_box[0]) + str(row_col_of_box[1] + 1)])
 
-	print(boxes_to_check_x)
-	print(boxes_to_check_y)
+	viable_slots_1 = []
+	viable_slots_2 = []
+	viable_slots = []
+
+	#for row in range(len(boxes_to_check_x[0])):
+	for box in boxes_to_check_x:
+		l = []
+		for loc in slots:
+			if(digit not in box.digits[loc[0]]):
+				l.append(loc)
+
+		viable_slots_1.append(l)
+
+	for box in boxes_to_check_y:
+		l = []
+		for loc in slots:
+			if(digit not in box.get_columns()[loc[1]]):
+				l.append(loc)
+
+		viable_slots_2.append(l)
+
+	if(len(viable_slots_1) != 1):
+		viable_slots_1 = list(set(viable_slots_1[0]) & set(viable_slots_1[1]))
+	else:
+		viable_slots_1 = viable_slots_1[0]
+
+	if(len(viable_slots_2) != 1):
+		viable_slots_2 = list(set(viable_slots_2[0]) & set(viable_slots_2[1]))
+	else:
+		viable_slots_2 = viable_slots_2[0]
+
+	viable_slots = list(set(viable_slots_1) & set(viable_slots_2))
+	print(viable_slots)
 
 if __name__ == '__main__':
 	make_small_boxes()
