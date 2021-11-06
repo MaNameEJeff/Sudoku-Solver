@@ -1,7 +1,7 @@
 class smallBox:
 
 	def __init__(self, location, digits):
-		self._location = location
+		self.location = location
 		self.setdigits(digits)
 
 	def setdigits(self, digits):
@@ -18,7 +18,7 @@ class smallBox:
 	def update(self, loc, number):
 		self.digits[loc[0]][loc[1]] = str(number)
 
-	def is_in(self, number):
+	def has(self, number):
 		for row in self.digits:
 			if number in row:
 				return True
@@ -38,3 +38,14 @@ class smallBox:
 			columns.append(l)
 
 		return(columns)
+
+	def get_empty(self):
+
+		locations = []
+		
+		for i in range(len(self.digits)):
+			for j in range(len(self.digits[i])):
+				if (self.digits[i][j] == "*"):
+					locations.append((i, j))
+
+		return(locations)
