@@ -1,15 +1,8 @@
 import pytesseract
-import cv2 as cv
 
 class getNumbers():
 
-	def get_numbers(images):
-
-		#This part needs to be sent by another program
-		images = {
-			"Row 1": [cv.imread('row1 square1.png'), cv.imread('row1 square2.png')],
-			"Row 2": [cv.imread('row2 square1.png'), cv.imread('row2 square2.png')]
-		}
+	def get_numbers(self, images):
 
 		image_numbers = []
 

@@ -1,21 +1,14 @@
 import math
 from smallBox import smallBox
 from getNumbers import getNumbers
+from cropping import cropping
+from showAnswer import showAnswer
 
+crop = cropping()
+cropped_images = crop.crop_image()
 ocr = getNumbers()
-grid = ocr.get_numbers()
-
-grid_rows = {
-	'Row 1': ['*', '6', '*', '3', '*', '*', '8', '*', '4'],
-	'Row 2': ['5', '3', '7', '*', '9', '*', '*', '*', '*'],
-	'Row 3': ['*', '4', '*', '*', '*', '6', '3', '*', '7'],
-	'Row 4': ['*', '9', '*', '*', '5', '1', '2', '3', '8'],
-	'Row 5': ['*', '*', '*', '*', '*', '*', '*', '*', '*'],
-	'Row 6': ['7', '1', '3', '6', '2', '*', '*', '4', '*'],
-	'Row 7': ['3', '*', '6', '4', '*', '*', '*', '1', '*'],
-	'Row 8': ['*', '*', '*', '*', '6', '*', '5', '2', '3'],
-	'Row 9': ['1', '*', '2', '*', '*', '9', '*', '8', '*']
-}
+grid = ocr.get_numbers(cropped_images)
+ans = showAnswer()
 
 small_boxes_numbers = {
 	"11": [],
@@ -30,11 +23,7 @@ small_boxes_numbers = {
 }
 
 small_boxes = {}
-grid = []
 not_completed = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-
-for key, value in grid_rows.items():
-	grid.append(value)
 
 def make_small_boxes():	
 
@@ -80,7 +69,15 @@ def show_solution():
 			k = 0
 		row += 1
 
-	print(sol)
+	answer = []
+	for row in sol:
+		l = []
+		for i in range(3):
+			l.extend(sol[row][i])
+
+		answer.append(l)
+
+	ans.display(answer)
 
 def solve_puzzle(digit):
 
