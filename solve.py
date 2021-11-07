@@ -51,10 +51,36 @@ def make_small_boxes():
 		small_boxes[k] = smallBox(k, v)
 
 def show_solution():
-	for loc, box in small_boxes.items():
-		print(loc)
-		print(box.digits)
-		print()
+
+	sol = {
+		"row 1": [],
+		"row 2": [],
+		"row 3": [],
+		"row 4": [],
+		"row 5": [],
+		"row 6": [],
+		"row 7": [],
+		"row 8": [],
+		"row 9": []
+	}
+
+	k = 0
+	i = 1
+	row = 1
+	while (i < 4):
+		j = 1
+		while(j < 4):
+
+			sol["row " + str(row)].append(small_boxes[str(i) + str(j)].digits[k])
+			j += 1
+
+		k += 1
+		if(k == 3):
+			i += 1
+			k = 0
+		row += 1
+
+	print(sol)
 
 def solve_puzzle(digit):
 
@@ -154,6 +180,5 @@ if __name__ == '__main__':
 	while(len(not_completed) != 0):
 		for i in not_completed:
 			solve_puzzle(i)
-
 
 	show_solution()
