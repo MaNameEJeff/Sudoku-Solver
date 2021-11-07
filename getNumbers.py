@@ -11,7 +11,7 @@ class getNumbers():
 			"Row 2": [cv.imread('row2 square1.png'), cv.imread('row2 square2.png')]
 		}
 
-		image_numbers = {}
+		image_numbers = []
 
 		for key,value in images.items():
 			numbers = []
@@ -32,6 +32,6 @@ class getNumbers():
 				else:
 					numbers.append(digit)
 
-			image_numbers[key] = numbers
+			image_numbers.append(numbers)
 
 		return(image_numbers)
