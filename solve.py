@@ -54,6 +54,7 @@ def show_solution():
 	for loc, box in small_boxes.items():
 		print(loc)
 		print(box.digits)
+		print()
 
 def solve_puzzle(digit):
 
