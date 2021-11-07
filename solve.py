@@ -10,6 +10,13 @@ ocr = getNumbers()
 grid = ocr.get_numbers(cropped_images)
 ans = showAnswer()
 
+known_numbers = []
+
+for row in range(len(grid)):
+	for column in range(len(grid[row])):
+		if(grid[row][column] != "*"):
+			known_numbers.append((row, column))
+
 small_boxes_numbers = {
 	"11": [],
 	"12": [],
@@ -77,13 +84,11 @@ def show_solution():
 
 		answer.append(l)
 
-	ans.display(answer)
+	ans.display(answer, known_numbers)
 
 def solve_puzzle(digit):
 
 	unfilled_boxes = []
-
-	print("Checking " + str(digit))
 
 	number_in = {
 		"11": small_boxes["11"].has(digit),

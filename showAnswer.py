@@ -2,7 +2,7 @@ import cv2 as cv
 
 class showAnswer():
 
-	def display(self, answer):
+	def display(self, answer, known):
 
 		answer_image = cv.imread("template.png")
 		row = 0
@@ -10,7 +10,12 @@ class showAnswer():
 		for y in range(0,225,25):
 			column = 0
 			for x in range(0,225,25):	
-				cv.putText(answer_image, str(answer[row][column]), (x+5, y+20), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
+
+				if((row, column) in known):
+					cv.putText(answer_image, str(answer[row][column]), (x+5, y+20), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+				else:
+					cv.putText(answer_image, str(answer[row][column]), (x+5, y+20), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
+					
 				column += 1
 			row += 1
 
