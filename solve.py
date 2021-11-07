@@ -6,15 +6,15 @@ ocr = getNumbers()
 grid = ocr.get_numbers()
 
 grid_rows = {
-	'Row 1': ['*', '*', '*', '5', '8', '9', '*', '*', '*'],
-	'Row 2': ['*', '*', '9', '*', '3', '6', '*', '*', '4'],
-	'Row 3': ['*', '5', '8', '4', '1', '*', '*', '*', '*'],
-	'Row 4': ['4', '7', '*', '*', '*', '*', '*', '2', '9'],
-	'Row 5': ['3', '*', '*', '*', '*', '*', '*', '*', '5'],
-	'Row 6': ['5', '9', '*', '*', '*', '*', '*', '1', '7'],
-	'Row 7': ['*', '*', '*', '*', '5', '7', '2', '4', '*'],
-	'Row 8': ['8', '*', '*', '6', '9', '*', '7', '*', '*'],
-	'Row 9': ['*', '*', '*', '3', '2', '8', '*', '*', '*']
+	'Row 1': ['*', '6', '*', '3', '*', '*', '8', '*', '4'],
+	'Row 2': ['5', '3', '7', '*', '9', '*', '*', '*', '*'],
+	'Row 3': ['*', '4', '*', '*', '*', '6', '3', '*', '7'],
+	'Row 4': ['*', '9', '*', '*', '5', '1', '2', '3', '8'],
+	'Row 5': ['*', '*', '*', '*', '*', '*', '*', '*', '*'],
+	'Row 6': ['7', '1', '3', '6', '2', '*', '*', '4', '*'],
+	'Row 7': ['3', '*', '6', '4', '*', '*', '*', '1', '*'],
+	'Row 8': ['*', '*', '*', '*', '6', '*', '5', '2', '3'],
+	'Row 9': ['1', '*', '2', '*', '*', '9', '*', '8', '*']
 }
 
 small_boxes_numbers = {
@@ -60,6 +60,8 @@ def solve_puzzle(digit):
 
 	unfilled_boxes = []
 
+	print("Checking " + str(digit))
+
 	number_in = {
 		"11": small_boxes["11"].has(digit),
 		"12": small_boxes["12"].has(digit),
@@ -82,33 +84,33 @@ def solve_puzzle(digit):
 
 	for box in unfilled_boxes:
 		slots = box.get_empty()
-		row_col_of_box = [int(box.location[0]), int(box.location[1])]
 
 		#Check columns
 		boxes_to_check_y = []
 		
-		y = row_col_of_box[0] - 1
+		y = int(box.location[0]) - 1
 		while(y > 0):
-			boxes_to_check_y.append(small_boxes[str(y) + str(row_col_of_box[1])])
+			boxes_to_check_y.append(small_boxes[str(y) + box.location[1]])
 			y -= 1
 
-		y = row_col_of_box[0] + 1
+		y = int(box.location[0]) + 1
 		while(y < 4):
-			if(small_boxes[str(y) + str(row_col_of_box[1])] not in boxes_to_check_y):
-				boxes_to_check_y.append(small_boxes[str(y) + str(row_col_of_box[1])])
+			if(small_boxes[str(y) + box.location[1]] not in boxes_to_check_y):
+				boxes_to_check_y.append(small_boxes[str(y) + box.location[1]])
 			y += 1
 
 		#Check rows
 		boxes_to_check_x = []
 
-		x = row_col_of_box[1] - 1
+		x = int(box.location[1]) - 1
 		while(x > 0):
-			boxes_to_check_x.append(small_boxes[str(row_col_of_box[0]) + str(x)])
+			boxes_to_check_x.append(small_boxes[box.location[0] + str(x)])
 			x -= 1
 
-		x = row_col_of_box[1] + 1
+		x = int(box.location[1]) + 1
 		while(x < 4):
-			boxes_to_check_x.append(small_boxes[str(row_col_of_box[0]) + str(x)])
+			if(small_boxes[box.location[0] + str(x)] not in boxes_to_check_x):
+				boxes_to_check_x.append(small_boxes[box.location[0] + str(x)])
 			x += 1
 
 		viable_slots_1 = []
