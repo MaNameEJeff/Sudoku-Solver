@@ -20,8 +20,13 @@ class getNumbers():
 						digit = digit.replace(ch, "")
 
 				#Store the digits in images_numbers, if there is no digit in image store "*"
+
+				print(digit)
+
 				if digit == "":
 					numbers.append("*")
+				elif(len(digit) > 1):
+					numbers.append(str(digit[1]))
 				else:
 					numbers.append(digit)
 

@@ -10,6 +10,8 @@ ocr = getNumbers()
 grid = ocr.get_numbers(cropped_images)
 ans = showAnswer()
 
+print(grid)
+
 known_numbers = []
 
 for row in range(len(grid)):
@@ -177,10 +179,11 @@ def solve_puzzle(digit):
 			box.update(viable_slots[0], digit)
 
 if __name__ == '__main__':
-	make_small_boxes()
-
-	while(len(not_completed) != 0):
-		for i in not_completed:
-			solve_puzzle(i)
-
-	show_solution()
+	print("Test")
+	#make_small_boxes()
+#
+	#while(len(not_completed) != 0):
+	#	for i in not_completed:
+	#		solve_puzzle(i)
+#
+	#show_solution()
