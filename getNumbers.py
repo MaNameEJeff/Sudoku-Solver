@@ -18,21 +18,25 @@ class getNumbers():
 				#Use the tesseract OCR to recognize each digit in each image
 				digit = pytesseract.image_to_string(img,config='--psm 10')
 
+				#print(digit)
+				#cv.imshow("test", img)
+				#cv.waitKey(0)
+
 				#Remove noise
 				for ch in digit:
 					if ch not in "1234567890":
 						digit = digit.replace(ch, "")
 
-				cv.imshow("Test", img)
-				cv.waitKey(0)
+				if(len(digit) > 1):
+					digit = digit[1:]
 
 				#Store the digits in images_numbers, if there is no digit in image store "*"
 
 				if digit == "":
-					print("*")
+					#print("*")
 					numbers.append("*")
 				else:
-					print(digit)
+					#print(digit)
 					numbers.append(digit)
 
 			image_numbers.append(numbers)

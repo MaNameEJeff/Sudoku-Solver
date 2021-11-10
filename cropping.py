@@ -28,18 +28,23 @@ class cropping():
 		for y in range(0,side,increment):
 			for x in range(2,side,increment):
 				box = puzzle[y:y+increment, x:x+increment].copy()
-				box = cv.resize(box, None, fx=3, fy=3, interpolation=cv.INTER_CUBIC)
+				box = cv.resize(box, None, fx=5, fy=5, interpolation=cv.INTER_CUBIC)
 				kernel = np.ones((1, 1), np.uint8)
-				#box = cv.dilate(box, kernel, iterations=2)
-				#box = cv.erode(box, kernel, iterations=1)
-				#box = cv.threshold(cv.medianBlur(box, 3), 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)[1]
+				box = cv.dilate(box, kernel, iterations=2)
+				box = cv.erode(box, kernel, iterations=1)
+				box = cv.threshold(cv.medianBlur(box, 5), 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)[1]
 				#box = cv.threshold(cv.bilateralFilter(box, 5, 75, 75), 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)[1]
-				box = cv.adaptiveThreshold(cv.bilateralFilter(box, 9, 75, 75), 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 31, 2)
+
+				height = box.shape[1]
+				width = box.shape[0]
+
+				#box = cv.adaptiveThreshold(cv.bilateralFilter(box, 9, 75, 75), 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 31, 2)
 				#box = cv.GaussianBlur(box, (3, 3), 0)
-				box = box[15:box.shape[1]-3, 5:box.shape[0]-13].copy()
 
 				if(count == 9):
-					box = box[0:box.shape[1]-10, 0:box.shape[0]].copy()
+					box = box = box[int(height/10):(box.shape[1] - int(height/10)), int(width/10):(box.shape[0]-int(width/10))].copy()
+				else:
+					box = box[int(height/10):(box.shape[1] - int(height/20)), int(width/10):(box.shape[0]-int(width/10))].copy()
 
 				if(("Row " + str(count)) not in images):
 					images[("Row " + str(count))] = [box]
