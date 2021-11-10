@@ -1,15 +1,19 @@
 import pytesseract
+import cv2 as cv
 
 class getNumbers():
 
 	def get_numbers(self, images):
 
 		image_numbers = []
+		valid = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '']
 
 		for key,value in images.items():
 			numbers = []
 
 			for img in value:
+
+				#img = cv.resize(img, (0,0), fx=1, fy=1)
 
 				#Use the tesseract OCR to recognize each digit in each image
 				digit = pytesseract.image_to_string(img,config='--psm 10')
@@ -19,15 +23,16 @@ class getNumbers():
 					if ch not in "1234567890":
 						digit = digit.replace(ch, "")
 
+				cv.imshow("Test", img)
+				cv.waitKey(0)
+
 				#Store the digits in images_numbers, if there is no digit in image store "*"
 
-				print(digit)
-
 				if digit == "":
+					print("*")
 					numbers.append("*")
-				elif(len(digit) > 1):
-					numbers.append(str(digit[1]))
 				else:
+					print(digit)
 					numbers.append(digit)
 
 			image_numbers.append(numbers)

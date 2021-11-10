@@ -10,7 +10,8 @@ ocr = getNumbers()
 grid = ocr.get_numbers(cropped_images)
 ans = showAnswer()
 
-print(grid)
+for row in grid:
+	print(row)
 
 known_numbers = []
 
