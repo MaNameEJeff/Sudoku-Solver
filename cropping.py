@@ -6,7 +6,7 @@ class cropping():
 
 	def crop_image(self):
 
-		img = cv.imread('Test2.png')
+		img = cv.imread('Test5.png')
 		img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 		img_canny = cv.Canny(img_gray, 30, 200)
 		contours, hierarchy = cv.findContours(img_canny, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_NONE)
@@ -33,13 +33,9 @@ class cropping():
 				box = cv.dilate(box, kernel, iterations=2)
 				box = cv.erode(box, kernel, iterations=1)
 				box = cv.threshold(cv.medianBlur(box, 5), 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)[1]
-				#box = cv.threshold(cv.bilateralFilter(box, 5, 75, 75), 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)[1]
 
 				height = box.shape[1]
 				width = box.shape[0]
-
-				#box = cv.adaptiveThreshold(cv.bilateralFilter(box, 9, 75, 75), 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 31, 2)
-				#box = cv.GaussianBlur(box, (3, 3), 0)
 
 				if(count == 9):
 					box = box = box[int(height/10):(box.shape[1] - int(height/10)), int(width/10):(box.shape[0]-int(width/10))].copy()

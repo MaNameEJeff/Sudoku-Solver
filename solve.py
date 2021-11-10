@@ -88,6 +88,8 @@ def show_solution():
 
 def solve_puzzle(digit):
 
+	print("Checking " + str(digit))
+
 	unfilled_boxes = []
 
 	number_in = {
