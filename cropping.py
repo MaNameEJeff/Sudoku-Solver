@@ -6,7 +6,8 @@ class cropping():
 
 	def crop_image(self):
 
-		img = cv.imread("Test2.png")
+		img = cv.imread("Original.png")
+		img = cv.resize(img, (500, 500))
 		background = cv.imread("background.png")
 
 		#I dont understand this
@@ -22,9 +23,6 @@ class cropping():
 		approx = cv.approxPolyDP(contours[0], 0.02*peri, True) #Get the corner points
 
 		puzzle = img_gray[approx[0][0][1]:approx[1][0][1], approx[1][0][0]:approx[2][0][0]].copy()
-
-		cv.imshow("puzzle", puzzle)
-		cv.waitKey(0)
 
 		h = puzzle.shape[0]
 		w = puzzle.shape[1]

@@ -178,8 +178,24 @@ def solve_puzzle(digit):
 		if(len(viable_slots) == 1):
 			box.update(viable_slots[0], digit)
 
+def confirm_question():
+	choice = "Y"
+	while(choice == "Y"):
+		choice = input("Do you want to change a box? (Y/N)")
+		if(choice == "Y"):
+			l_box = input("Enter the large box you want to correct: ")
+			s_box_txt = input("Enter the small box you want to correct: ")
+			s_box = (int(s_box_txt[0]), int(s_box_txt[1]))
+			print(s_box)
+			number = input("Enter the number: ")
+			small_boxes[str(l_box)].update(s_box, number)
+			show_solution()
+
 if __name__ == '__main__':
 	make_small_boxes()
+
+	show_solution()
+	confirm_question()
 
 	while(len(not_completed) != 0):
 		for i in not_completed:
