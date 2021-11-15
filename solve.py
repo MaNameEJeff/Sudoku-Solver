@@ -3,6 +3,9 @@ from smallBox import smallBox
 from getNumbers import getNumbers
 from cropping import cropping
 from showAnswer import showAnswer
+import sys
+
+global count
 
 crop = cropping()
 cropped_images = crop.crop_image()
@@ -177,6 +180,7 @@ def solve_puzzle(digit):
 
 		if(len(viable_slots) == 1):
 			box.update(viable_slots[0], digit)
+			count = 0
 
 def confirm_question():
 	choice = "Y"
@@ -192,6 +196,7 @@ def confirm_question():
 			show_solution()
 
 if __name__ == '__main__':
+	count = 0
 	make_small_boxes()
 
 	show_solution()
@@ -199,6 +204,11 @@ if __name__ == '__main__':
 
 	while(len(not_completed) != 0):
 		for i in not_completed:
+			count += 1
+			if(count >= 100):
+				print("Current solution")
+				show_solution()
+				sys.exit("Couldn't solve puzzle")
 			solve_puzzle(i)
 
 	show_solution()

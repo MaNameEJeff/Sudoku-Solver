@@ -6,7 +6,7 @@ class cropping():
 
 	def crop_image(self):
 
-		img = cv.imread("Original.png")
+		img = cv.imread("test.png")
 		img = cv.resize(img, (500, 500))
 		background = cv.imread("background.png")
 
